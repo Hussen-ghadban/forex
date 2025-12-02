@@ -1,0 +1,96 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { Shield, Timer, CircleSlash } from "lucide-react";
+
+export default function SecurePayments() {
+  return (
+    <div className="w-full flex justify-center py-16 px-4 bg-[#1a1d29]">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="w-full max-w-5xl"
+      >
+        <Card className="bg-[#232837] text-white border-none shadow-xl p-10 rounded-2xl">
+          <CardContent className="flex flex-col items-center text-center space-y-10">
+
+            {/* Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.6 }}
+              className="text-4xl font-bold"
+            >
+              Secure & Exclusive Payments
+            </motion.h1>
+
+            {/* Wish Money Logo */}
+            <motion.div
+              initial={{ scale: 0.7, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex flex-col items-center space-y-3"
+            >
+              <div className="w-20 h-20 rounded-full border-2 border-[#00d4ff] flex items-center justify-center">
+                <span className="text-4xl text-[#00d4ff] font-bold">W</span>
+              </div>
+              <h2 className="text-2xl font-semibold">Wish Money</h2>
+            </motion.div>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-gray-300 max-w-2xl text-[15px] leading-relaxed"
+            >
+              All transactions are processed securely through{" "}
+              <span className="font-semibold">Wish Money</span>, ensuring fast,
+              clean, reliable, and verified payments for all trading-related services.
+              To maintain a safe and efficient payment process, we exclusively use
+              Wisly for deposits, mentorship enrollments, and service subscriptions.
+            </motion.p>
+
+            {/* Features */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.6 }}
+              className="flex flex-col md:flex-row items-center justify-center gap-10 pt-6"
+            >
+              <Feature icon={<Timer className="w-10 h-10 text-[#00d4ff]" />} label="Instant Transfers" />
+              <Feature icon={<CircleSlash className="w-10 h-10 text-[#00d4ff]" />} label="0 Fees" />
+              <Feature icon={<Shield className="w-10 h-10 text-[#00d4ff]" />} label="Trusted Verification" />
+            </motion.div>
+
+            {/* Footer Note */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+              className="text-gray-400 text-sm max-w-xl pt-4"
+            >
+              Wish Money provides instant transfers, 0 fees, and a trusted verification
+              system to protect your funds during every transaction.
+            </motion.p>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </div>
+  );
+}
+
+/* Reusable Feature Component */
+function Feature({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.12 }}
+      transition={{ type: "spring", stiffness: 200, damping: 12 }}
+      className="flex flex-col items-center space-y-2 cursor-default"
+    >
+      {icon}
+      <p className="font-medium">{label}</p>
+    </motion.div>
+  );
+}
