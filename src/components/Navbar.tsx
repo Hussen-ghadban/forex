@@ -1,12 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
@@ -53,33 +48,44 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Mobile Burger Menu using ShadCN Dialog */}
+        {/* Mobile Hamburger */}
         <div className="md:hidden">
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <button aria-label="Open menu">
-                <Menu size={24} />
-              </button>
-            </DialogTrigger>
-            <DialogContent className="p-6 pt-4">
-              <div className="flex flex-col gap-4">
-                {links.map(link => (
-                  <Link
-                    key={link.id}
-                    to={link.path}
-                    className={`text-lg font-medium hover:text-[#3bc2ff] ${
-                      active === link.id ? "text-[#3bc2ff]" : ""
-                    }`}
-                    onClick={() => setOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </DialogContent>
-          </Dialog>
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Dropdown Menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden md:hidden bg-[#141821] px-6"
+          >
+            <div className="flex flex-col gap-4 py-4">
+              {links.map(link => (
+                <Link
+                  key={link.id}
+                  to={link.path}
+                  className={`text-lg font-medium hover:text-[#3bc2ff] ${
+                    active === link.id ? "text-[#3bc2ff]" : ""
+                  }`}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
