@@ -72,36 +72,41 @@ export default function ContactTestimonials() {
             </Button>
 
             {/* Testimonial Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl px-16">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="bg-[#232837] border-[#00d4ff] border-2 hover:shadow-lg hover:shadow-[#00d4ff]/20 transition-all duration-300">
-                    <CardContent className="flex flex-col items-center text-center p-6 space-y-4">
-                      <div className="w-24 h-24 rounded-full border-4 border-[#00d4ff] overflow-hidden">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex gap-1">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        {testimonial.text}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+<div className="w-full max-w-3xl px-16">
+  {testimonials.length > 0 && (
+    <motion.div
+      key={currentSlide}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4 }}
+    >
+      <Card className="bg-[#232837] border-[#00d4ff] border-2 hover:shadow-lg hover:shadow-[#00d4ff]/20 transition-all duration-300">
+        <CardContent className="flex flex-col items-center text-center p-6 space-y-4">
+          
+          <div className="w-24 h-24 rounded-full border-4 border-[#00d4ff] overflow-hidden">
+            <img
+              src={testimonials[currentSlide].image}
+              alt={testimonials[currentSlide].name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="flex gap-1">
+            {[...Array(testimonials[currentSlide].rating)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+            ))}
+          </div>
+
+          <p className="text-gray-300 text-sm leading-relaxed">
+            {testimonials[currentSlide].text}
+          </p>
+
+        </CardContent>
+      </Card>
+    </motion.div>
+  )}
+</div>
+
 
             {/* Next Button */}
             <Button

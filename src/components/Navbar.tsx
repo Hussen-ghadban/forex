@@ -1,12 +1,8 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const location = useLocation();
-
-  // Sync active tab with the URL
-  const [active, setActive] = useState("");
 
   const links = [
     { id: "about", label: "About Me", path: "/" },
@@ -16,11 +12,8 @@ export default function Navbar() {
     { id: "tech-stack", label: "tech stack", path: "/tech-stack" },
   ];
 
-  // Automatically detect which link should be active based on current URL
-  useEffect(() => {
-    const found = links.find((l) => l.path === location.pathname);
-    if (found) setActive(found.id);
-  }, [location.pathname]);
+  // derive the active tab from the current route
+  const active = links.find(l => l.path === location.pathname)?.id;
 
   return (
     <nav className="w-full bg-[#141821] text-white shadow-md sticky top-0 z-50">
@@ -40,12 +33,10 @@ export default function Navbar() {
             <Link
               key={link.id}
               to={link.path}
-              onClick={() => setActive(link.id)}
               className="relative text-sm font-medium"
             >
               {link.label}
 
-              {/* Underline animation */}
               {active === link.id && (
                 <motion.div
                   layoutId="underline"
