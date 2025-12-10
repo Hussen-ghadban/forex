@@ -36,9 +36,9 @@ export default function AboutMeSection() {
             className="w-48 h-48 rounded-full overflow-hidden border-2 border-[#3bc2ff] flex-shrink-0"
           >
             <img
-              src="https://via.placeholder.com/200"
+              src="profile.jpg"
               alt="Profile"
-              className="w-full h-full object-cover"
+              className="w-full h-auto"
             />
           </motion.div>
 
@@ -52,9 +52,8 @@ export default function AboutMeSection() {
             >
               <h2 className="text-2xl font-semibold">My Trading Journey</h2>
               <p className="text-gray-300 text-[15px] leading-relaxed max-w-xl pt-2">
-                ThetaTrader Conut eumg is aneshes elart eo fo Flextt Toring Forsh your
-                anformamance pad aute, whele reallity and aetorte to your ttty yorneax
-                ongle yialr’s mald trading possible.
+                At least one year of experience in the forex field. I used to work with Prima Capital broker, and afterward, 
+                I am now with BBcorp broker through Aawada Forex, which is a company registered in Lebanon and legally licensed.
               </p>
             </motion.div>
 
@@ -67,9 +66,9 @@ export default function AboutMeSection() {
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <h2 className="text-2xl font-semibold">My Philosophy (Transparency & Discipline)</h2>
-
+              <p>I improve myself through 6 areas which are:</p>
               <ul className="pt-4 space-y-3 text-gray-300">
-                {["Your net tlnet", "Aw wiertered | yourt emsparrey & Discilpng", "2 dlurd rogentant f your dhdmet yoreariaiit amuid your Aos o sh entengy"].map(
+                {["Reducing position size and improving risk management Controlling emotions", "building discipline", "and mastering patience Advanced traders study their trades", "review mistakes", "and learn from the data You trade what you see", "not what you believe."].map(
                   (item, index) => (
                     <motion.li
                       key={index}
@@ -101,7 +100,7 @@ export default function AboutMeSection() {
                 <div className="w-14 h-14 rounded-full border border-[#3bc2ff] flex items-center justify-center">
                   <span className="text-xl font-bold text-[#3bc2ff]">M5</span>
                 </div>
-                <h3 className="text-lg font-medium">Executed with MTS Precision.</h3>
+                <h3 className="text-lg text-white font-medium">Executed with MTS Precision.</h3>
                 <button className="mt-3 px-4 py-2 bg-[#3bc2ff] text-black rounded-xl font-medium hover:bg-[#5fd1ff] transition-all">
                   Learn More
                 </button>
@@ -118,7 +117,7 @@ export default function AboutMeSection() {
           >
             <Card className="bg-[#141821] border border-[#3bc2ff]/30 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
               <CardContent className="space-y-4">
-                <h3 className="text-xl font-semibold">My Mission</h3>
+                <h3 className="text-xl text-white font-semibold">My Mission</h3>
                 <p className="text-gray-300 text-[15px] leading-relaxed">
                   Y ourt emoutcr odh the. the polcey thenatomis yiall leslie’o oob tle ble att inte the yout ethenes, poct of be tos encuely atterterectead usder you pecik you de theable.
                 </p>
