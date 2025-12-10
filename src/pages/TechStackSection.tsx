@@ -2,8 +2,18 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BarChart3, Gauge, Settings, Target } from "lucide-react";
+import { useMemo } from "react";
 
 export default function TechStackSection() {
+  // Detect if user is on iOS
+  const isIOS = useMemo(() => {
+    return typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  }, []);
+
+  const mt5DownloadLink = isIOS 
+    ? "https://apps.apple.com/us/app/metatrader-5-forex-stocks/id413251709"
+    : "https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5";
+
   const features = [
     {
       icon: Target,
@@ -58,18 +68,25 @@ export default function TechStackSection() {
         >
           {/* MT5 Logo */}
           <div className="flex-shrink-0">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#00d4ff] to-[#0099cc] flex items-center justify-center">
-              <span className="text-6xl font-bold text-white">M5</span>
-            </div>
+            <img
+              src="metatrader5.jpeg"
+              alt="Profile"
+              className="w-full h-auto"
+            />
           </div>
 
           {/* MT5 Description */}
           <div className="flex-1 space-y-6">
             <h2 className="text-3xl font-bold">MetaTrader 5 (MT5)</h2>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Hybrid is multi-aset platform for speed, Price Action. Im. supports Forex, andh adiata dmiarket's, and CFDS, stocks,  to clean interface acresass as devices.
+              MetaTrader 5 (MT5) is a powerful multi-asset trading platform used for forex, stocks, and CFDs.
+               It offers advanced charting, fast execution, automated trading with Expert Advisors (EAs), and access to a large set of technical indicators. MT5 is known for its professional tools,
+               user-friendly interface, and flexibility for both beginner and advanced traders.
             </p>
-            <Button className="bg-gradient-to-r from-[#00d4ff] to-[#00ff88] hover:from-[#00d4ff]/90 hover:to-[#00ff88]/90 text-[#1a1d29] font-semibold px-8 py-6 text-lg rounded-lg">
+            <Button 
+              onClick={() => window.open(mt5DownloadLink, '_blank')}
+              className="bg-gradient-to-r from-[#00d4ff] to-[#00ff88] hover:from-[#00d4ff]/90 hover:to-[#00ff88]/90 text-[#1a1d29] font-semibold px-8 py-6 text-lg rounded-lg"
+            >
               Download MetaTrader 5
             </Button>
           </div>
@@ -95,12 +112,12 @@ export default function TechStackSection() {
                 transition={{ delay: 0.4 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
               >
-                <Card className="bg-[#232837] border-[#00d4ff] border-2 hover:shadow-lg hover:shadow-[#00d4ff]/30 transition-all duration-300">
-                  <CardContent className="flex flex-col items-center justify-center text-center p-8 space-y-4 h-full">
-                    <div className="p-4 bg-[#1a1d29] rounded-full border-2 border-[#00d4ff]">
-                      <feature.icon className="w-10 h-10 text-[#00d4ff]" />
+                <Card className="bg-[#232837] border-[#00d4ff] border-2 hover:shadow-lg hover:shadow-[#00d4ff]/30 transition-all duration-300 h-full">
+                  <CardContent className="flex flex-col items-center justify-center text-center p-6 space-y-3 h-48">
+                    <div className="p-3 bg-[#1a1d29] rounded-full border-2 border-[#00d4ff]">
+                      <feature.icon className="w-8 h-8 text-[#00d4ff]" />
                     </div>
-                    <h3 className="text-lg text-white font-semibold">{feature.title}</h3>
+                    <h3 className="text-base text-white font-semibold">{feature.title}</h3>
                   </CardContent>
                 </Card>
               </motion.div>
