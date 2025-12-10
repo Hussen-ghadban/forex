@@ -1,8 +1,19 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Shield, Timer, CircleSlash } from "lucide-react";
+import { useMemo } from "react";
 
 export default function SecurePayments() {
+  // Detect if user is on iOS
+  const isIOS = useMemo(() => {
+    return typeof window !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  }, []);
+
+  const wishMoneyDownloadLink = isIOS 
+    ? "https://apps.apple.com/us/app/wish-money-send-money-online/id1291540969"
+    : "https://play.google.com/store/apps/details?id=com.wishmoney";
+
   return (
     <div className="w-full flex justify-center py-16 px-4 bg-[#1a1d29]">
       <motion.div
@@ -32,11 +43,11 @@ export default function SecurePayments() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="flex flex-col items-center space-y-3"
             >
-             <img
-  src="whish.png"
-  alt="Profile"
-  className="w-full h-auto rounded-lg"
-/>
+              <img
+                src="whish.png"
+                alt="Profile"
+                className="w-full h-auto rounded-lg"
+              />
 
               <h2 className="text-2xl font-semibold">whish Money</h2>
             </motion.div>
@@ -49,11 +60,25 @@ export default function SecurePayments() {
               className="text-gray-300 max-w-2xl text-[15px] leading-relaxed"
             >
               All transactions are processed securely through{" "}
-              <span className="font-semibold">whish  Money</span>, ensuring fast,
+              <span className="font-semibold">whish Money</span>, ensuring fast,
               clean, reliable, and verified payments for all trading-related services.
               To maintain a safe and efficient payment process, we exclusively use
               Wisly for deposits, mentorship enrollments, and service subscriptions.
             </motion.p>
+
+            {/* Download Button */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <Button 
+                onClick={() => window.open(wishMoneyDownloadLink, '_blank')}
+                className="bg-gradient-to-r from-[#00d4ff] to-[#00ff88] hover:from-[#00d4ff]/90 hover:to-[#00ff88]/90 text-[#1a1d29] font-semibold px-8 py-6 text-lg rounded-lg"
+              >
+                Download Wish Money
+              </Button>
+            </motion.div>
 
             {/* Features */}
             <motion.div

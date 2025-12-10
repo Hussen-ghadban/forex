@@ -33,19 +33,6 @@ export default function TechStackSection() {
     }
   ];
 
-  const tradingExamples = [
-    {
-      title: "Pizetten4",
-      image: "/api/placeholder/500/350",
-      alt: "MT5 Trading Example 1"
-    },
-    {
-      title: "MT5 Placement",
-      image: "/api/placeholder/500/350",
-      alt: "MT5 Trading Example 2"
-    }
-  ];
-
   return (
     <div className="w-full min-h-screen bg-[#1a1d29] text-white px-4 py-16">
       <div className="max-w-6xl mx-auto space-y-20">
@@ -124,50 +111,6 @@ export default function TechStackSection() {
             ))}
           </div>
         </div>
-
-        {/* MT5 in Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="space-y-10"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold">
-            MT5 in Action: Precision Trading
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {tradingExamples.map((example, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Card className="bg-[#232837] border-[#00d4ff] border-2 overflow-hidden hover:shadow-xl hover:shadow-[#00d4ff]/30 transition-all duration-300 group">
-                  <CardContent className="p-0">
-                    <div className="relative">
-                      {/* Header Badge */}
-                      <div className="absolute top-4 left-4 z-10 bg-[#232837]/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-[#00d4ff] flex items-center gap-2">
-                        <div className="w-2 h-2 bg-[#00d4ff] rounded-full"></div>
-                        <span className="text-sm font-semibold">{example.title}</span>
-                      </div>
-                      
-                      {/* Trading Chart Image */}
-                      <div className="aspect-video bg-[#1a1d29] flex items-center justify-center overflow-hidden">
-                        <img 
-                          src={example.image} 
-                          alt={example.alt}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
       </div>
     </div>
   );
