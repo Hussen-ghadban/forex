@@ -32,10 +32,13 @@ export default function SecurePayments() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="flex flex-col items-center space-y-3"
             >
-              <div className="w-20 h-20 rounded-full border-2 border-[#00d4ff] flex items-center justify-center">
-                <span className="text-4xl text-[#00d4ff] font-bold">W</span>
-              </div>
-              <h2 className="text-2xl font-semibold">Wish Money</h2>
+             <img
+  src="whish.png"
+  alt="Profile"
+  className="w-full h-auto rounded-lg"
+/>
+
+              <h2 className="text-2xl font-semibold">whish Money</h2>
             </motion.div>
 
             {/* Description */}
@@ -46,7 +49,7 @@ export default function SecurePayments() {
               className="text-gray-300 max-w-2xl text-[15px] leading-relaxed"
             >
               All transactions are processed securely through{" "}
-              <span className="font-semibold">Wish Money</span>, ensuring fast,
+              <span className="font-semibold">whish  Money</span>, ensuring fast,
               clean, reliable, and verified payments for all trading-related services.
               To maintain a safe and efficient payment process, we exclusively use
               Wisly for deposits, mentorship enrollments, and service subscriptions.

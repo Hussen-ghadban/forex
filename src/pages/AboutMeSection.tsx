@@ -29,18 +29,23 @@ export default function AboutMeSection() {
           className="flex flex-col md:flex-row items-center md:items-start gap-10 bg-[#141821] p-10 rounded-2xl shadow-xl"
         >
           {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, rotate: -5 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="w-48 h-48 rounded-full overflow-hidden border-2 border-[#3bc2ff] flex-shrink-0"
-          >
-            <img
-              src="profile.jpg"
-              alt="Profile"
-              className="w-full h-auto"
-            />
-          </motion.div>
+       <motion.div
+  initial={{ opacity: 0, rotate: -5 }}
+  animate={{ opacity: 1, rotate: 0 }}
+  transition={{ duration: 0.6, delay: 0.3 }}
+  className="flex flex-col items-center"
+>
+  <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-[#3bc2ff]">
+    <img
+      src="profile.jpg"
+      alt="Profile"
+      className="w-full h-auto"
+    />
+  </div>
+
+  <p className="mt-2 text-white font-semibold">Mohamad Rkein</p>
+</motion.div>
+
 
           {/* Text Section */}
           <div className="flex-1 space-y-8">
@@ -89,24 +94,6 @@ export default function AboutMeSection() {
         {/* Teaser Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* First Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Card className="bg-[#141821] border border-[#3bc2ff]/30 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-              <CardContent className="space-y-4">
-                <div className="w-14 h-14 rounded-full border border-[#3bc2ff] flex items-center justify-center">
-                  <span className="text-xl font-bold text-[#3bc2ff]">M5</span>
-                </div>
-                <h3 className="text-lg text-white font-medium">Executed with MTS Precision.</h3>
-                <button className="mt-3 px-4 py-2 bg-[#3bc2ff] text-black rounded-xl font-medium hover:bg-[#5fd1ff] transition-all">
-                  Learn More
-                </button>
-              </CardContent>
-            </Card>
-          </motion.div>
 
           {/* Second Card */}
           <motion.div
@@ -119,7 +106,8 @@ export default function AboutMeSection() {
               <CardContent className="space-y-4">
                 <h3 className="text-xl text-white font-semibold">My Mission</h3>
                 <p className="text-gray-300 text-[15px] leading-relaxed">
-                  Y ourt emoutcr odh the. the polcey thenatomis yiall leslie’o oob tle ble att inte the yout ethenes, poct of be tos encuely atterterectead usder you pecik you de theable.
+                  My mission is to simplify Forex for traders of all levels by delivering clear, honest, and actionable analysis.
+                  I focus on education, transparency, and real value—helping traders build knowledge, manage risk, and grow consistently.
                 </p>
               </CardContent>
             </Card>
