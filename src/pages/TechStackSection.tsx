@@ -100,7 +100,7 @@ export default function TechStackSection() {
                     <div className="p-4 bg-[#1a1d29] rounded-full border-2 border-[#00d4ff]">
                       <feature.icon className="w-10 h-10 text-[#00d4ff]" />
                     </div>
-                    <h3 className="text-lg font-semibold">{feature.title}</h3>
+                    <h3 className="text-lg text-white font-semibold">{feature.title}</h3>
                   </CardContent>
                 </Card>
               </motion.div>
