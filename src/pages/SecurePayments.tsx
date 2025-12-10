@@ -11,8 +11,8 @@ export default function SecurePayments() {
   }, []);
 
   const wishMoneyDownloadLink = isIOS 
-    ? "https://apps.apple.com/us/app/wish-money-send-money-online/id1291540969"
-    : "https://play.google.com/store/apps/details?id=com.wishmoney";
+    ? "https://apps.apple.com/lb/app/whish-money/id1284243483"
+    : "https://play.google.com/store/apps/details?id=money.whish.android";
 
   return (
     <div className="w-full flex justify-center py-16 px-4 bg-[#1a1d29]">
