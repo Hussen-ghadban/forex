@@ -159,7 +159,7 @@ export default function ContactTestimonials() {
                         />
                       </div>
                       
-                      <h3 className="text-xl font-semibold">{testimonials[currentSlide].name}</h3>
+                      <h3 className="text-xl  text-white font-semibold">{testimonials[currentSlide].name}</h3>
 
                       <div className="flex gap-1">
                         {[...Array(testimonials[currentSlide].rating)].map((_, i) => (
