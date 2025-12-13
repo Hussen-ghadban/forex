@@ -24,7 +24,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <div className="w-9 h-9 flex items-center justify-center rounded-full bg-[#3bc2ff] text-black font-semibold">
-            MS
+            NF
           </div>
           <span className="text-lg tracking-wide font-medium">Next Forex</span>
         </div>
@@ -35,7 +35,7 @@ export default function Navbar() {
             <Link
               key={link.id}
               to={link.path}
-              className="relative text-sm font-medium hover:text-[#3bc2ff]"
+              className="relative text-md font-medium hover:text-[#3bc2ff]"
             >
               {link.label}
               {active === link.id && (
