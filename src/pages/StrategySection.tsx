@@ -6,13 +6,11 @@ import { Badge } from "@/components/ui/badge";
 export default function StrategySection() {
   const tradeExamples = [
     {
-      title: "MT5 Proment",
-      image: "/api/placeholder/500/300",
+      image: "/images/chart1.jpg",
       alt: "Trade Example 1"
     },
     {
-      title: "Management",
-      image: "/api/placeholder/500/300",
+      image: "/images/chart2.jpg",
       alt: "Trade Example 2"
     }
   ];
@@ -117,12 +115,6 @@ export default function StrategySection() {
                 transition={{ duration: 0.2 }}
               >
                 <Card className="bg-[#232837] border-[#00d4ff] border-2 overflow-hidden hover:shadow-xl hover:shadow-[#00d4ff]/30 transition-all duration-300 group">
-                  <CardHeader className="border-b border-gray-700 bg-[#1a1d29]/50">
-                    <CardTitle className="flex items-center gap-2 md:gap-3 text-white">
-                      <div className="w-3 h-3 bg-[#00d4ff] rounded-full group-hover:bg-[#00ff88] transition-colors"></div>
-                      <span className="text-base md:text-lg">{example.title}</span>
-                    </CardTitle>
-                  </CardHeader>
                   <CardContent className="p-0">
                     <div className="aspect-video bg-[#1a1d29] flex items-center justify-center overflow-hidden">
                       <img 
@@ -137,24 +129,6 @@ export default function StrategySection() {
             ))}
           </div>
         </motion.div>
-
-        {/* Dive Deeper Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="space-y-6 md:space-y-8 pb-8"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center md:text-left">Dive Deeper into the Data</h2>
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-6 px-6 sm:px-8 md:px-12 text-lg md:text-2xl font-bold bg-gradient-to-r from-[#00d4ff] to-[#00ff88] rounded-2xl shadow-lg hover:shadow-xl hover:shadow-[#00d4ff]/50 transition-all duration-300 cursor-pointer text-center md:text-left"
-          >
-            Dive Deeper into my Rating request
-          </motion.div>
-        </motion.div>
-
       </div>
     </div>
   );
