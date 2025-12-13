@@ -110,7 +110,7 @@ export default function StrategySection() {
           {/* Section Header */}
           <div className="flex items-center gap-4">
             <TrendingUp className="w-8 h-8 text-[#00d4ff]" />
-            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl pb-5 md:text-5xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Strategy in Action
             </h2>
           </div>
@@ -136,12 +136,7 @@ export default function StrategySection() {
                   <div className="absolute inset-0 bg-[#00d4ff]/0 group-hover:bg-[#00d4ff]/5 rounded-2xl blur-xl transition-all duration-500"></div>
                   
                   {/* Main Image Frame */}
-                  <div className="relative bg-gradient-to-br from-[#1a1f2e] to-[#0f1218] p-4 md:p-6 rounded-2xl border border-[#00d4ff]/20 group-hover:border-[#00d4ff]/60 transition-all duration-500">
-                    {/* Image Number Badge */}
-                    <div className="absolute top-6 left-6 z-10 bg-[#00d4ff] text-[#0a0e1a] px-4 py-2 rounded-lg font-bold text-sm">
-                      Example {index + 1}
-                    </div>
-                    
+                  <div className="relative bg-gradient-to-br from-[#1a1f2e] to-[#0f1218] p-4 md:p-6 rounded-2xl border border-[#00d4ff]/20 group-hover:border-[#00d4ff]/60 transition-all duration-500">                    
                     {/* Image */}
                     <div className="bg-[#0a0e1a] rounded-xl overflow-hidden">
                       <img 
@@ -158,18 +153,6 @@ export default function StrategySection() {
               </motion.div>
             ))}
           </div>
-
-          {/* Optional: Call to Action */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-center pt-8"
-          >
-            <p className="text-gray-500 text-sm uppercase tracking-wider">
-              Scroll to see more examples or view detailed breakdowns
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </div>
