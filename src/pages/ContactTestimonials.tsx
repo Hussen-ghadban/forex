@@ -10,15 +10,16 @@ import {
   Star, 
   Send,
   Instagram,
-  Mail
+  Mail,
+  Loader2
 } from "lucide-react";
+import emailjs from '@emailjs/browser';
 
 export default function ContactTestimonials() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    phoneNumber: "",
     message: ""
   });
   const [errors, setErrors] = useState({
@@ -26,8 +27,13 @@ export default function ContactTestimonials() {
     email: false,
     message: false
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const RECIPIENT_EMAIL = "arzouni1277@gmail.com";
+  // EmailJS Configuration
+  const EMAILJS_SERVICE_ID =   import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID =   import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY =   import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const testimonials = [
     {
@@ -37,13 +43,13 @@ export default function ContactTestimonials() {
       text: "Thanks to consistent, clear signals, my account achieved 50% growth in the first week."
     },
     {
-      name: "Jane Smith",
+      name: "Marcel Salameh",
       image: "/images/person2.jpg",
       rating: 5,
-      text: "Consistent clear signals. My account grew by 15% in the first month"
+      text: "Consistent clear signals. My account grew by 40% in the first month"
     },
     {
-      name: "Mike Johnson",
+      name: "Hassan Kteish",
       image: "/images/person3.jpg",
       rating: 5,
       text: "Finally a strategy that works consistently month after month"
@@ -78,13 +84,17 @@ export default function ContactTestimonials() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [name]: false }));
+    }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newErrors = {
-      fullName: !formData.fullName,
-      email: !formData.email,
-      message: !formData.message
+      fullName: !formData.fullName.trim(),
+      email: !formData.email.trim(),
+      message: !formData.message.trim()
     };
     
     setErrors(newErrors);
@@ -93,28 +103,43 @@ export default function ContactTestimonials() {
       return;
     }
 
-    const subject = encodeURIComponent("New Contact Form Submission");
-    const body = encodeURIComponent(
-      `Full Name: ${formData.fullName}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phoneNumber || "Not provided"}\n` +
-      `Message: ${formData.message}`
-    );
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    window.location.href = `mailto:${RECIPIENT_EMAIL}?subject=${subject}&body=${body}`;
-    
-    setFormData({
-      fullName: "",
-      email: "",
-      phoneNumber: "",
-      message: ""
-    });
-    
-    setErrors({
-      fullName: false,
-      email: false,
-      message: false
-    });
+    try {
+      // EmailJS template parameters
+      const templateParams = {
+        to_email: 'houssenghadban@gmail.com',
+        name: formData.fullName,
+        email: formData.email,
+        message: formData.message,
+      };
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitStatus('success');
+      setFormData({
+        fullName: "",
+        email: "",
+        message: ""
+      });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -204,6 +229,7 @@ export default function ContactTestimonials() {
                   placeholder="Full Name"
                   value={formData.fullName}
                   onChange={handleInputChange}
+                  disabled={isSubmitting}
                   className={`bg-[#232837] border-gray-700 text-white placeholder:text-gray-500 ${errors.fullName ? 'border-red-500' : ''}`}
                 />
                 {errors.fullName && <p className="text-red-500 text-sm mt-1">Full name is required</p>}
@@ -216,19 +242,11 @@ export default function ContactTestimonials() {
                   placeholder="Email Address"
                   value={formData.email}
                   onChange={handleInputChange}
+                  disabled={isSubmitting}
                   className={`bg-[#232837] border-gray-700 text-white placeholder:text-gray-500 ${errors.email ? 'border-red-500' : ''}`}
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
-              </div>
-              
-              <Input 
-                name="phoneNumber"
-                placeholder="Phone Number (Optional)"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                className="bg-[#232837] border-gray-700 text-white placeholder:text-gray-500"
-              />
-              
+              </div>              
               <div>
                 <Textarea 
                   name="message"
@@ -236,6 +254,7 @@ export default function ContactTestimonials() {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
+                  disabled={isSubmitting}
                   className={`bg-[#232837] border-gray-700 text-white placeholder:text-gray-500 resize-none ${errors.message ? 'border-red-500' : ''}`}
                 />
                 {errors.message && <p className="text-red-500 text-sm mt-1">Message is required</p>}
@@ -243,11 +262,41 @@ export default function ContactTestimonials() {
               
               <Button 
                 onClick={handleSubmit}
-                className="w-full bg-[#00d4ff] hover:bg-[#00d4ff]/90 text-[#1a1d29] font-semibold py-6 text-lg group"
+                disabled={isSubmitting}
+                className="w-full bg-[#00d4ff] hover:bg-[#00d4ff]/90 text-[#1a1d29] font-semibold py-6 text-lg group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message 
-                <Mail className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message 
+                    <Mail className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
               </Button>
+
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400 text-center"
+                >
+                  Message sent successfully! We'll get back to you soon.
+                </motion.div>
+              )}
+
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400 text-center"
+                >
+                  Failed to send message. Please try again or contact us directly.
+                </motion.div>
+              )}
             </div>
             
           </motion.div>
@@ -284,15 +333,12 @@ export default function ContactTestimonials() {
             </div>
 
             <div className="space-y-6 pt-8">
-              <h2 className="text-3xl font-bold">Book a Call</h2>
-              <Button className="w-full bg-gradient-to-r from-[#00d4ff] to-[#00ff88] hover:from-[#00d4ff]/90 hover:to-[#00ff88]/90 text-[#1a1d29] font-bold py-8 text-xl rounded-full">
-                Book a Free Consultation
+              <Button 
+                onClick={() => window.open('https://wa.me/96170613670?text=Hello%2C%20I%20would%20like%20to%20learn%20more%20about%20your%20trading%20services', '_blank')}
+                className="w-full bg-gradient-to-r from-[#00d4ff] to-[#00ff88] hover:from-[#00d4ff]/90 hover:to-[#00ff88]/90 text-[#1a1d29] font-bold py-8 text-xl rounded-full"
+              >
+                Contact Us via WhatsApp
               </Button>
-              <p className="text-gray-400">
-                Email: <a href={`mailto:${RECIPIENT_EMAIL}`} className="text-[#00d4ff] hover:underline">
-                  {RECIPIENT_EMAIL}
-                </a>
-              </p>
             </div>
           </motion.div>
         </div>
